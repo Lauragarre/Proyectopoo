@@ -8,6 +8,53 @@ package modelo;
  *
  * @author PCLino
  */
-public class Persona {
+/**Persona es una clase estracta que hará de enlace entre todas las clases que herenden de ella como: Jugador,Directivo y Técnico**/
+public abstract class Persona {
+    private String dni;
+    private String nombrecompleto;
+    private Nomina nomina;
+    private int telefono;
+
+    public Persona(String dni, String nombrecompleto, Nomina nomina, int telefono) {
+        this.dni = dni;
+        this.nombrecompleto = nombrecompleto;
+        this.nomina = nomina;
+        this.telefono = telefono;
+    }
+
+    public String getDni() {
+        return dni;
+    }
+
+    public void setDni(String dni) {
+        this.dni = dni;
+    }
+
+    public String getNombrecompleto() {
+        return nombrecompleto;
+    }
+
+    public void setNombrecompleto(String nombrecompleto) {
+        this.nombrecompleto = nombrecompleto;
+    }
+
+    public Nomina getNomina() {
+        return nomina;
+    }
+
+    public void setNomina(Nomina nomina) {
+        this.nomina = nomina;
+    }
+
+    public int getTelefono() {
+        return telefono;
+    }
+
+    public void setTelefono(int telefono) {
+        this.telefono = telefono;
+    }
+    
+    
+    public abstract void mostratInformacion();
     
 }

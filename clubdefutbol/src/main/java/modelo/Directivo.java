@@ -8,6 +8,25 @@ package modelo;
  *
  * @author PCLino
  */
-public class Directivo {
+public class Directivo extends Persona {
+
+    private String cargo;
     
+    public Directivo(String dni, String nombrecompleto,Nomina nomina, int telefono,String cargo) {
+        super(dni,nombrecompleto,nomina,telefono);
+        this.cargo = cargo;
+    }
+    
+    public String getCargo() {
+        return cargo;
+    }
+
+    public void setCargo(String cargo) {
+        this.cargo = cargo;
+    }
+
+    @Override
+    public void mostratInformacion() {
+        
+    }
 }

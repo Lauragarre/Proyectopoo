@@ -8,6 +8,36 @@ package modelo;
  *
  * @author PCLino
  */
-public class Tecnico {
+public class Tecnico extends Persona {  
+
+    private String puesto;
+    private String especialidad;
     
+    public Tecnico(String dni, String nombrecompleto,Nomina nomina, int telefono,String puesto, String especialidad) {
+        super(dni,nombrecompleto,nomina,telefono);
+        this.puesto = puesto;
+        this.especialidad = especialidad;
+    }
+    
+     public String getPuesto() {
+        return puesto;
+    }
+
+    public void setPuesto(String puesto) {
+        this.puesto = puesto;
+    }
+
+    public String getEspecialidad() {
+        return especialidad;
+    }
+
+    public void setEspecialidad(String especialidad) {
+        this.especialidad = especialidad;
+    }
+
+    @Override
+    public void mostratInformacion() {
+        
+    }
 }
+    
