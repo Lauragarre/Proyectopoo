@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.time.LocalDate;
+
 /**
  *
  * @author PCLino
@@ -14,6 +16,8 @@ public abstract class Persona {
     private String nombrecompleto;
     private Nomina nomina;
     private int telefono;
+    private boolean eliminado;
+    private LocalDate fechaEliminacion;
 
     public Persona(String dni, String nombrecompleto, Nomina nomina, int telefono) {
         this.dni = dni;
@@ -53,6 +57,16 @@ public abstract class Persona {
     public void setTelefono(int telefono) {
         this.telefono = telefono;
     }
+    
+    public void marcarEliminado() {
+    this.eliminado = true;
+    this.fechaEliminacion = LocalDate.now();
+    }
+
+    public boolean isEliminado() {
+    return eliminado;
+    }
+
     
     
     public abstract void mostratInformacion();

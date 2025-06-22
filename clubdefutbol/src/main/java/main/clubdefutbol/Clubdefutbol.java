@@ -4,6 +4,11 @@
 
 package main.clubdefutbol;
 
+import controlador.PersonaRepository;
+import controlador.PersonaService;
+import vista.GestionPersonal;
+import vista.Menu;
+
 /**
  *
  * @author PCLino
@@ -11,6 +16,10 @@ package main.clubdefutbol;
 public class Clubdefutbol {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
+        PersonaRepository repo = new PersonaRepository();
+        PersonaService service = new PersonaService(repo);
+
+        Menu gui = new Menu(service);
+        gui.setVisible(true);
     }
 }
