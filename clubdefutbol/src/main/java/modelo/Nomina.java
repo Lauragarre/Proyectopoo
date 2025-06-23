@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.List;
+
 /**
  *
  * @author PCLino
@@ -44,7 +46,15 @@ public class Nomina extends Persona {
         this.concepto = concepto;
     }
     
-    
+    public void generarNomina(Nomina nomina){
+        
+    }
+    public List<Nomina> listarNominas(){
+        
+        return null;
+        
+    }
+
 
     @Override
     public void mostratInformacion() {

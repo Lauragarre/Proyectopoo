@@ -4,6 +4,9 @@
  */
 package modelo;
 
+import java.time.LocalDate;
+import java.util.List;
+
 /**
  *
  * @author PCLino
@@ -81,4 +84,13 @@ public class Partido {
     public void setJugadores(Jugador jugadores) {
         this.jugadores = jugadores;
     }
+    public void registrarPartido(Partido partido){
+        
+    }
+    public List<Partido> listarPartidos(){
+        
+       return null;
+        
+    }
+
 }

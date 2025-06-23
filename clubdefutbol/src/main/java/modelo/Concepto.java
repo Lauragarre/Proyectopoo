@@ -4,6 +4,8 @@
  */
 package modelo;
 
+import java.util.List;
+
 /**
  *
  * @author PCLino
@@ -43,4 +45,13 @@ public class Concepto {
         this.importe = importe;
     }
     
+    public void agregarConceptoNomina(String dniEmpleado, Concepto concepto){
+        
+    }
+    public List<Concepto> obtenerConceptosNomina(String dniEmpleado){
+        
+        return null;
+        
+    }
+
 }
