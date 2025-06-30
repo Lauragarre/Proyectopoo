@@ -181,6 +181,9 @@ public class GestionPersonal extends javax.swing.JFrame {
 
     if (registrado) {
         JOptionPane.showMessageDialog(this, "La persona puede ser registrada en la base");
+        FormularioPersona registro = new FormularioPersona(dni1txt.getText());
+        dispose();
+        registro.setVisible(true);
     } else {
         JOptionPane.showMessageDialog(this, "La persona ya está registrada con ese DNI.", "Error", JOptionPane.ERROR_MESSAGE);
     }

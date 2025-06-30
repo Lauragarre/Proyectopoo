@@ -5,9 +5,11 @@
 package controlador;
 
 import java.util.List;
+import java.util.Map;
 import modelo.Directivo;
 import modelo.Jugador;
 import modelo.Persona;
+import modelo.PersonaFactory;
 import modelo.Tecnico;
 
 /**
@@ -20,21 +22,36 @@ import modelo.Tecnico;
     public class PersonaService {
 
     private PersonaRepository personaRepository;
-
+    private PersonaFactory personaFactory;
+    
     public PersonaService(PersonaRepository personaRepository) {
         this.personaRepository = personaRepository;
+        this.personaFactory = new PersonaFactory();   
     }
 
     /**
      * Registra una nueva persona si el DNI no existe.
      */
-    public boolean registrarPersona(Persona persona) {
-        if (personaRepository.existe(persona.getDni())) {
-            return false; // Ya existe
-        }
-        personaRepository.agregarPersona(persona);
-        return true;
+    public boolean registrarPersona(String tipo, Map<String, String> datos) {
+    String dni = datos.get("dni");
+
+    // Verificar si la persona ya existe
+    if (personaRepository.existe(dni)) {
+        return false; // Ya existe una persona con ese DNI
     }
+
+    // Crear la persona usando la factory
+    Persona persona = personaFactory.crearPersona(tipo, datos);
+
+    if (persona == null) {
+        return false; // Tipo no reconocido
+    }
+
+    // Guardar la persona en el repositorio
+    personaRepository.agregarPersona(persona);
+    return true;
+}
+
   
     
 
