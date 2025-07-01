@@ -8,12 +8,12 @@ package modelo;
  *
  * @author PCLino
  */
-public class Concepto {
+public class ConceptoNomina {
     private String codigo;
     private String descripcion;
     private double importe;
 
-    public Concepto(String codigo, String descripcion, double importe) {
+    public ConceptoNomina(String codigo, String descripcion, double importe) {
         this.codigo = codigo;
         this.descripcion = descripcion;
         this.importe = importe;
@@ -22,7 +22,6 @@ public class Concepto {
     public String getCodigo() {
         return codigo;
     }
-
     public void setCodigo(String codigo) {
         this.codigo = codigo;
     }
@@ -30,7 +29,6 @@ public class Concepto {
     public String getDescripcion() {
         return descripcion;
     }
-
     public void setDescripcion(String descripcion) {
         this.descripcion = descripcion;
     }
@@ -38,7 +36,6 @@ public class Concepto {
     public double getImporte() {
         return importe;
     }
-
     public void setImporte(double importe) {
         this.importe = importe;
     }

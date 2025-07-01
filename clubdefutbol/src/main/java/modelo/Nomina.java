@@ -4,52 +4,42 @@
  */
 package modelo;
 
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author PCLino
  */
-public class Nomina extends Persona {
-    private String mes;
-    private String ano;
-    private Concepto concepto;
+public class Nomina {
+    private int mes;
+    private int ano;
+    private ArrayList<ConceptoNomina> conceptos;
 
-    public Nomina(String mes, String ano, Concepto concepto, String dni, String nombrecompleto,Nomina nomina, int telefono) {
-        super(dni, nombrecompleto,nomina,telefono);
+    public Nomina(int mes, int ano, ArrayList<ConceptoNomina> conceptos) {
         this.mes = mes;
         this.ano = ano;
-        this.concepto = concepto;
+        this.conceptos = conceptos;
     }
 
-    public String getMes() {
+    public int getMes() {
         return mes;
     }
-
-    public void setMes(String mes) {
+    public void setMes(int mes) {
         this.mes = mes;
     }
 
-    public String getAno() {
+    public int getAno() {
         return ano;
     }
-
-    public void setAno(String ano) {
+    public void setAno(int ano) {
         this.ano = ano;
     }
 
-    public Concepto getConcepto() {
-        return concepto;
+    public List<ConceptoNomina> getConceptos() {
+        return conceptos;
     }
-
-    public void setConcepto(Concepto concepto) {
-        this.concepto = concepto;
+    public void setConceptos(ArrayList<ConceptoNomina> concepto) {
+        this.conceptos = concepto;
     }
-    
-    
-
-    @Override
-    public void mostratInformacion() {
-        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
-    }
-    
-    
 }

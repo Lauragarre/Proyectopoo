@@ -21,8 +21,9 @@ public class GestionPersonal extends javax.swing.JFrame {
     this.personaService = personaService;
     initComponents(); 
     labelregistro.setVisible(false);
-    btnregistrar.setVisible(false);
+    btnañadir.setVisible(false);
     dni1txt.setVisible(false);
+    btneliminar.setVisible(false);
     }
 
 
@@ -44,8 +45,9 @@ public class GestionPersonal extends javax.swing.JFrame {
         panelpersonas = new javax.swing.JPanel();
         jButton1 = new javax.swing.JButton();
         labelregistro = new javax.swing.JLabel();
-        btnregistrar = new javax.swing.JButton();
+        btnañadir = new javax.swing.JButton();
         dni1txt = new javax.swing.JTextField();
+        btneliminar = new javax.swing.JButton();
         jMenuBar1 = new javax.swing.JMenuBar();
         menubar = new javax.swing.JMenu();
         jMenu2 = new javax.swing.JMenu();
@@ -65,12 +67,25 @@ public class GestionPersonal extends javax.swing.JFrame {
 
         labelregistro.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
         labelregistro.setForeground(new java.awt.Color(0, 0, 0));
-        labelregistro.setText("REGISTRO DE DNI:");
+        labelregistro.setText("Introduce DNI:");
 
-        btnregistrar.setText("Registrar");
-        btnregistrar.addActionListener(new java.awt.event.ActionListener() {
+        btnañadir.setText("Añadir");
+        btnañadir.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnregistrarActionPerformed(evt);
+                btnañadirActionPerformed(evt);
+            }
+        });
+
+        dni1txt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                dni1txtActionPerformed(evt);
+            }
+        });
+
+        btneliminar.setText("Eliminar");
+        btneliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneliminarActionPerformed(evt);
             }
         });
 
@@ -78,34 +93,36 @@ public class GestionPersonal extends javax.swing.JFrame {
         panelpersonas.setLayout(panelpersonasLayout);
         panelpersonasLayout.setHorizontalGroup(
             panelpersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpersonasLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1)
+                .addGap(20, 20, 20))
             .addGroup(panelpersonasLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(panelpersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpersonasLayout.createSequentialGroup()
-                        .addGap(0, 0, Short.MAX_VALUE)
-                        .addComponent(jButton1)
-                        .addGap(23, 23, 23))
+                .addGroup(panelpersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(btnañadir)
                     .addGroup(panelpersonasLayout.createSequentialGroup()
-                        .addGroup(panelpersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(btnregistrar)
-                            .addGroup(panelpersonasLayout.createSequentialGroup()
-                                .addComponent(labelregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(dni1txt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addContainerGap(123, Short.MAX_VALUE))))
+                        .addComponent(labelregistro, javax.swing.GroupLayout.PREFERRED_SIZE, 123, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(31, 31, 31)
+                        .addComponent(dni1txt, javax.swing.GroupLayout.PREFERRED_SIZE, 121, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btneliminar)
+                .addContainerGap(34, Short.MAX_VALUE))
         );
         panelpersonasLayout.setVerticalGroup(
             panelpersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, panelpersonasLayout.createSequentialGroup()
-                .addGap(74, 74, 74)
-                .addGroup(panelpersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(labelregistro)
-                    .addComponent(dni1txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addComponent(btnregistrar)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 92, Short.MAX_VALUE)
+                .addGap(91, 91, 91)
+                .addGroup(panelpersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labelregistro, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(panelpersonasLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(dni1txt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btneliminar)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btnañadir)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 85, Short.MAX_VALUE)
                 .addComponent(jButton1)
-                .addGap(16, 16, 16))
+                .addGap(20, 20, 20))
         );
 
         menubar.setText("Añadir");
@@ -131,9 +148,23 @@ public class GestionPersonal extends javax.swing.JFrame {
         jMenuBar1.add(menubar);
 
         jMenu2.setText("Modificar");
+        jMenu2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jMenu2MouseClicked(evt);
+            }
+        });
         jMenuBar1.add(jMenu2);
 
         jMenu1.setText("Eliminar");
+        jMenu1.addMenuListener(new javax.swing.event.MenuListener() {
+            public void menuCanceled(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuDeselected(javax.swing.event.MenuEvent evt) {
+            }
+            public void menuSelected(javax.swing.event.MenuEvent evt) {
+                jMenu1MenuSelected(evt);
+            }
+        });
         jMenuBar1.add(jMenu1);
 
         jMenu3.setText("Listar");
@@ -160,32 +191,69 @@ public class GestionPersonal extends javax.swing.JFrame {
         dispose();   
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void menubarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menubarActionPerformed
-       
-    }//GEN-LAST:event_menubarActionPerformed
-
-    private void menubarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menubarMouseClicked
-        labelregistro.setVisible(true);
-        btnregistrar.setVisible(true);
-        dni1txt.setVisible(true);
-    }//GEN-LAST:event_menubarMouseClicked
-
-    private void menubarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menubarMenuSelected
-      
-    }//GEN-LAST:event_menubarMenuSelected
-
-    private void btnregistrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnregistrarActionPerformed
-        String dni = dni1txt.getText();
+    private void btnañadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnañadirActionPerformed
+    String dni = dni1txt.getText();
 
     boolean registrado = personaService.exitePersona(dni);
 
     if (registrado) {
         JOptionPane.showMessageDialog(this, "La persona puede ser registrada en la base");
+        FormularioPersona registro = new FormularioPersona(dni1txt.getText(),personaService);
+        dispose();
+        registro.setVisible(true);
     } else {
         JOptionPane.showMessageDialog(this, "La persona ya está registrada con ese DNI.", "Error", JOptionPane.ERROR_MESSAGE);
     }
         
-    }//GEN-LAST:event_btnregistrarActionPerformed
+    }//GEN-LAST:event_btnañadirActionPerformed
+
+    private void dni1txtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dni1txtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_dni1txtActionPerformed
+
+    private void jMenu2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jMenu2MouseClicked
+        
+        Modificar modificar = new Modificar(personaService);
+        modificar.setVisible(true);
+    }//GEN-LAST:event_jMenu2MouseClicked
+
+    private void menubarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menubarActionPerformed
+
+    }//GEN-LAST:event_menubarActionPerformed
+
+    private void menubarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_menubarMouseClicked
+        labelregistro.setVisible(true);
+        btnañadir.setVisible(true);
+        btneliminar.setVisible(false);
+        dni1txt.setVisible(true);
+    }//GEN-LAST:event_menubarMouseClicked
+
+    private void menubarMenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_menubarMenuSelected
+
+    }//GEN-LAST:event_menubarMenuSelected
+
+    private void jMenu1MenuSelected(javax.swing.event.MenuEvent evt) {//GEN-FIRST:event_jMenu1MenuSelected
+        labelregistro.setVisible(true);
+        btneliminar.setVisible(true);
+        btnañadir.setVisible(false);
+        dni1txt.setVisible(true);
+    }//GEN-LAST:event_jMenu1MenuSelected
+
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+    String dni = dni1txt.getText();
+    
+    boolean registrado = personaService.exitePersona(dni);
+
+    if (registrado) {
+         JOptionPane.showMessageDialog(this, "No existe ese dni en la base", "Error", JOptionPane.ERROR_MESSAGE);
+       
+    } else {
+        personaService.eliminarPersona(dni);
+        JOptionPane.showMessageDialog(this, "La persona ha sido eliminada con exito");
+    }
+    dni1txt.setText("");
+        
+    }//GEN-LAST:event_btneliminarActionPerformed
 
     
     /**
@@ -194,7 +262,8 @@ public class GestionPersonal extends javax.swing.JFrame {
     
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnregistrar;
+    private javax.swing.JButton btnañadir;
+    private javax.swing.JButton btneliminar;
     private javax.swing.JTextField dni1txt;
     private javax.swing.JButton jButton1;
     private javax.swing.JMenu jMenu1;

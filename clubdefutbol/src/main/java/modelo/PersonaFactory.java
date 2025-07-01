@@ -4,21 +4,38 @@
  */
 package modelo;
 
+import java.util.Map;
+
 /**
  *
  * @author PCLino
  */
 public class PersonaFactory {
-    public static Persona crearPersona(String tipo, String nombrecompleto, String dni,Nomina nomina, int telefono,int edad, int valormercado, boolean estadofisico, String cargo, String puesto, String especialidad) {
-        switch (tipo.toLowerCase()) {
-            case "jugador":
-                return new Jugador(dni,nombrecompleto,nomina,telefono,edad,valormercado,estadofisico);
-            case "directivo":
-                return new Directivo(dni,nombrecompleto,nomina,telefono,cargo);
-            case "tecnico":
-                return new Tecnico(dni,nombrecompleto,nomina,telefono,puesto,especialidad);
-            default:
-                throw new IllegalArgumentException("Error con el tipo de persona insertado");
-        }
+   public static Persona crearPersona(String tipo, Map<String, String> datos) {
+    String nombrecompleto = datos.get("nombrecompleto");
+    String dni = datos.get("dni");
+    Nomina nomina = null; 
+    int telefono = Integer.parseInt(datos.get("telefono"));
+    int edad = Integer.parseInt(datos.get("edad"));
+
+    switch (tipo.toLowerCase()) {
+        case "jugador":
+            int valorMercado = Integer.parseInt(datos.get("valormercado"));
+            boolean estadoFisico = Boolean.parseBoolean(datos.get("estadofisico"));
+            return new Jugador(dni, nombrecompleto, nomina, telefono, edad, valorMercado, estadoFisico);
+
+        case "directivo":
+            String cargo = datos.get("cargo");
+           return new Directivo(dni, nombrecompleto, nomina, telefono, cargo);
+
+        case "tecnico":
+            String puesto = datos.get("puesto");
+            String especialidad = datos.get("especialidad");
+            return new Tecnico(dni, nombrecompleto,nomina, telefono,puesto, especialidad);
+
+        default:
+            throw new IllegalArgumentException("Tipo de persona no reconocido: " + tipo);
     }
+}
+
 }

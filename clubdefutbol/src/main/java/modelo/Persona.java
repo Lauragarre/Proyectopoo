@@ -67,7 +67,11 @@ public abstract class Persona {
     return eliminado;
     }
 
-    
+    @Override
+    public String toString() {
+    return nombrecompleto;  
+    }
+
     
     public abstract void mostratInformacion();
     
