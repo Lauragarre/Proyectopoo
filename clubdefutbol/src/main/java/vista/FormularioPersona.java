@@ -4,7 +4,11 @@
  */
 package vista;
 
+import controlador.PersonaService;
 import java.awt.event.ItemEvent;
+import java.util.HashMap;
+import java.util.Map;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -15,7 +19,9 @@ public class FormularioPersona extends javax.swing.JFrame {
     /**
      * Creates new form FormularioPersona
      */
-    public FormularioPersona(String dni) {
+    private PersonaService personaService;
+    public FormularioPersona(String dni, PersonaService personaService) {
+        this.personaService = personaService;
         initComponents();
         labeldni.setText(dni);
     }
@@ -29,6 +35,7 @@ public class FormularioPersona extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         btnañadir = new javax.swing.JButton();
@@ -39,7 +46,7 @@ public class FormularioPersona extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         telefonotxt = new javax.swing.JTextField();
         labeldni = new javax.swing.JLabel();
-        spnvalormercado = new javax.swing.JSpinner();
+        spnedad = new javax.swing.JSpinner();
         lblcargo = new javax.swing.JLabel();
         lblmercado = new javax.swing.JLabel();
         lblfisico = new javax.swing.JLabel();
@@ -49,6 +56,19 @@ public class FormularioPersona extends javax.swing.JFrame {
         lblespecialidad = new javax.swing.JLabel();
         txtespecialidad = new javax.swing.JTextField();
         txtpuesto = new javax.swing.JTextField();
+        lbedad = new javax.swing.JLabel();
+        spnvalormercado = new javax.swing.JSpinner();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 400, Short.MAX_VALUE)
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 300, Short.MAX_VALUE)
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -59,11 +79,17 @@ public class FormularioPersona extends javax.swing.JFrame {
         jLabel1.setText("REGISTRAR PERSONAS");
 
         btnañadir.setText("Añadir");
+        btnañadir.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnañadirActionPerformed(evt);
+            }
+        });
 
         jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Tipo:");
 
         cbtipo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " ", "Jugador", "Directivo", "Tecnico", " " }));
+        cbtipo.setLightWeightPopupEnabled(false);
         cbtipo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 cbtipoItemStateChanged(evt);
@@ -73,12 +99,18 @@ public class FormularioPersona extends javax.swing.JFrame {
         jLabel3.setForeground(new java.awt.Color(0, 0, 0));
         jLabel3.setText("Nombre completo:");
 
+        nombretxt.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                nombretxtActionPerformed(evt);
+            }
+        });
+
         jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Telefono:");
 
         labeldni.setForeground(new java.awt.Color(0, 0, 0));
 
-        spnvalormercado.setEnabled(false);
+        spnedad.setEnabled(false);
 
         lblcargo.setForeground(new java.awt.Color(0, 0, 0));
         lblcargo.setText("Cargo:");
@@ -114,6 +146,12 @@ public class FormularioPersona extends javax.swing.JFrame {
             }
         });
 
+        lbedad.setForeground(new java.awt.Color(0, 0, 0));
+        lbedad.setText("Edad:");
+        lbedad.setEnabled(false);
+
+        spnvalormercado.setEnabled(false);
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -129,12 +167,20 @@ public class FormularioPersona extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(lblespecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(jLabel3)
                                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 71, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(lbedad, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                                        .addComponent(spnedad)
+                                        .addGap(139, 139, 139)
+                                        .addComponent(lblpuesto1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                                     .addGroup(jPanel1Layout.createSequentialGroup()
                                         .addComponent(cbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 164, Short.MAX_VALUE)
@@ -146,19 +192,14 @@ public class FormularioPersona extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                             .addComponent(lblmercado, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(lblfisico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(0, 0, Short.MAX_VALUE)
-                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(lblespecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(lblpuesto1, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                            .addComponent(lblfisico, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                         .addGap(18, 18, 18)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtcargo)
                             .addComponent(cbestado, 0, 98, Short.MAX_VALUE)
                             .addComponent(txtespecialidad)
-                            .addComponent(spnvalormercado)
-                            .addComponent(txtpuesto))
+                            .addComponent(txtpuesto)
+                            .addComponent(spnvalormercado))
                         .addGap(64, 64, 64))))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -172,45 +213,52 @@ public class FormularioPersona extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(61, 61, 61)
-                                .addComponent(jLabel3))
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addGap(15, 15, 15)
-                                .addComponent(jLabel1)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(61, 61, 61)
+                                        .addComponent(jLabel3))
+                                    .addGroup(jPanel1Layout.createSequentialGroup()
+                                        .addGap(15, 15, 15)
+                                        .addComponent(jLabel1)
+                                        .addGap(18, 18, 18)
+                                        .addComponent(nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                                 .addGap(18, 18, 18)
-                                .addComponent(nombretxt, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(18, 18, 18)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel4)
-                            .addComponent(telefonotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(28, 28, 28)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(cbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(lblcargo)
-                                .addComponent(txtcargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel4)
+                                    .addComponent(telefonotxt, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(28, 28, 28)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2)
+                                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(cbtipo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(lblcargo)
+                                        .addComponent(txtcargo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addGap(72, 72, 72)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(lblmercado)
+                                    .addComponent(spnvalormercado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(18, 18, 18)
+                                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(lblfisico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(cbestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(spnvalormercado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(lblmercado))
-                        .addGap(18, 18, 18)
+                            .addComponent(lblpuesto1)
+                            .addComponent(txtpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(lblfisico, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cbestado, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                .addGap(25, 25, 25)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(lblpuesto1)
-                    .addComponent(txtpuesto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                            .addComponent(lbedad)
+                            .addComponent(spnedad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(5, 5, 5)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblespecialidad)
                     .addComponent(txtespecialidad, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnañadir)
-                    .addComponent(labeldni, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(labeldni, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnañadir))
                 .addGap(15, 15, 15))
         );
 
@@ -239,13 +287,15 @@ public class FormularioPersona extends javax.swing.JFrame {
          txtespecialidad.setEnabled(false);
          lblpuesto1.setEnabled(false);
          lblespecialidad.setEnabled(false);
-        spnvalormercado.setEnabled(false);
+        spnedad.setEnabled(false);
         cbestado.setEnabled(false);
         lblmercado.setEnabled(false);
         lblfisico.setEnabled(false);
         txtcargo.setEnabled(false);
         lblcargo.setEnabled(false);
-     switch (tipo) {
+        spnvalormercado.setEnabled(false);
+        lbedad.setEnabled(false);
+        switch (tipo) {
             
             case "Tecnico":
                 txtpuesto.setEnabled(true);
@@ -254,10 +304,12 @@ public class FormularioPersona extends javax.swing.JFrame {
                 lblespecialidad.setEnabled(true);
                 break;
             case "Jugador":
-                spnvalormercado.setEnabled(true);
+                spnedad.setEnabled(true);
                 cbestado.setEnabled(true);
                 lblmercado.setEnabled(true);
                 lblfisico.setEnabled(true);
+                spnvalormercado.setEnabled(true);
+                lbedad.setEnabled(true);
                 break;
             case "Directivo":
                 txtcargo.setEnabled(true);
@@ -273,6 +325,43 @@ public class FormularioPersona extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtespecialidadActionPerformed
 
+    private void btnañadirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnañadirActionPerformed
+        //Map con todos los datos recogidos
+        Map<String,String> datos = new HashMap<>();
+        datos.put("dni", labeldni.getText());
+        datos.put("nombrecompleto", nombretxt.getText());
+        datos.put("telefono",telefonotxt.getText());
+        datos.put("valormercado", spnvalormercado.getValue().toString());
+        datos.put("estadofisco", cbestado.getSelectedItem().toString());
+        datos.put("cargo", txtcargo.getText());
+        datos.put("Especialidad",txtespecialidad.getText());
+        datos.put("puesto",txtpuesto.getText());
+        datos.put("edad", spnedad.getValue().toString());
+        String tipo = cbtipo.getSelectedItem().toString();
+        boolean registrado = personaService.registrarPersona(tipo, datos);
+        if (registrado){
+            JOptionPane.showMessageDialog(null, "Persona registrada correctamente.");
+            // Limpiar campos
+            labeldni.setText("");
+            nombretxt.setText("");
+            cbestado.setSelectedIndex(0);
+            cbtipo.setSelectedIndex(0);
+            telefonotxt.setText("");
+            txtespecialidad.setText("");
+            txtpuesto.setText("");
+            spnedad.setValue(0);
+            spnvalormercado.setValue(0);
+            dispose();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error: El DNI ya existe o el tipo no es válido.");
+            
+        }
+    }//GEN-LAST:event_btnañadirActionPerformed
+
+    private void nombretxtActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_nombretxtActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_nombretxtActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -282,18 +371,21 @@ public class FormularioPersona extends javax.swing.JFrame {
     private javax.swing.JButton btnañadir;
     private javax.swing.JComboBox<String> cbestado;
     private javax.swing.JComboBox<String> cbtipo;
+    private javax.swing.JDialog jDialog1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel labeldni;
+    private javax.swing.JLabel lbedad;
     private javax.swing.JLabel lblcargo;
     private javax.swing.JLabel lblespecialidad;
     private javax.swing.JLabel lblfisico;
     private javax.swing.JLabel lblmercado;
     private javax.swing.JLabel lblpuesto1;
     private javax.swing.JTextField nombretxt;
+    private javax.swing.JSpinner spnedad;
     private javax.swing.JSpinner spnvalormercado;
     private javax.swing.JTextField telefonotxt;
     private javax.swing.JTextField txtcargo;

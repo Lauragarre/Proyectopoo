@@ -31,6 +31,9 @@ import modelo.Tecnico;
 
     /**
      * Registra una nueva persona si el DNI no existe.
+     * @param tipo
+     * @param datos
+     * @return 
      */
     public boolean registrarPersona(String tipo, Map<String, String> datos) {
     String dni = datos.get("dni");
@@ -71,6 +74,7 @@ import modelo.Tecnico;
     }
     /**
      * Elimina (lógicamente) una persona por su DNI.
+     * @param dni
      */
     
     
@@ -78,15 +82,10 @@ import modelo.Tecnico;
         personaRepository.eliminarPersona(dni);
     }
 
-    /**
-     * Modifica nombre y teléfono de una persona.
-     */
-    public boolean modificarPersona(String dni, String nuevoNombre, int nuevoTelefono) {
-        return personaRepository.modificarPersona(dni, nuevoNombre, nuevoTelefono);
-    }
-
+    
     /**
      * Lista todas las personas activas.
+     * @return 
      */
     public List<Persona> listarActivos() {
         return personaRepository.listarPersonasActivas();
@@ -94,6 +93,7 @@ import modelo.Tecnico;
 
     /**
      * Lista todas las personas eliminadas.
+     * @return 
      */
     public List<Persona> listarEliminados() {
         return personaRepository.listarPersonasEliminadas();
@@ -101,6 +101,7 @@ import modelo.Tecnico;
 
     /**
      * Lista los jugadores activos.
+     * @return 
      */
     public List<Jugador> listarJugadores() {
         return personaRepository.obtenerJugadores();
@@ -108,6 +109,7 @@ import modelo.Tecnico;
 
     /**
      * Lista los técnicos activos.
+     * @return 
      */
     public List<Tecnico> listarTecnicos() {
         return personaRepository.obtenerTecnicos();
@@ -115,8 +117,14 @@ import modelo.Tecnico;
 
     /**
      * Lista los directivos activos.
+     * @return 
      */
     public List<Directivo> listarDirectivos() {
         return personaRepository.obtenerDirectivos();
     }
+    
+    public void actualizarPersona(Persona persona) {
+    personaRepository.actualizarPersona(persona);
+    }
+
 }

@@ -72,21 +72,7 @@ public class PersonaRepository {
             p.marcarEliminado(); // Este método debe estar en la clase Persona
         }
     }
-
-    /**
-     * Modifica el nombre y teléfono de una persona.
-     * Puedes extender esto si lo necesitas.
-     * @param dni
-     */
-    public boolean modificarPersona(String dni, String nuevoNombre, int nuevoTelefono) {
-        Persona p = personasRegistradas.get(dni);
-        if (p == null || p.isEliminado()) return false;
-
-        p.setNombrecompleto(nuevoNombre);
-        p.setTelefono(nuevoTelefono);
-        return true;
-    }
-
+    
     /**
      * Devuelve todos los jugadores activos.
      * @return 
@@ -127,4 +113,9 @@ public class PersonaRepository {
     public Map<String, Persona> getPersonasRegistradas() {
         return personasRegistradas;
     }
+    
+    public void actualizarPersona(Persona persona) {
+    personasRegistradas.put(persona.getDni(), persona);
+    }
+
 }

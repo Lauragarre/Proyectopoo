@@ -12,7 +12,7 @@ import java.util.Map;
  */
 public class PersonaFactory {
    public static Persona crearPersona(String tipo, Map<String, String> datos) {
-    String nombre = datos.get("nombrecompleto");
+    String nombrecompleto = datos.get("nombrecompleto");
     String dni = datos.get("dni");
     Nomina nomina = null; 
     int telefono = Integer.parseInt(datos.get("telefono"));
@@ -22,16 +22,16 @@ public class PersonaFactory {
         case "jugador":
             int valorMercado = Integer.parseInt(datos.get("valormercado"));
             boolean estadoFisico = Boolean.parseBoolean(datos.get("estadofisico"));
-            return new Jugador(dni, nombre, nomina, telefono, edad, valorMercado, estadoFisico);
+            return new Jugador(dni, nombrecompleto, nomina, telefono, edad, valorMercado, estadoFisico);
 
         case "directivo":
             String cargo = datos.get("cargo");
-           // return new Directivo(dni, nombre, nomina, telefono, cargo);
+           return new Directivo(dni, nombrecompleto, nomina, telefono, cargo);
 
         case "tecnico":
             String puesto = datos.get("puesto");
             String especialidad = datos.get("especialidad");
-            return new Tecnico(dni, nombre,nomina, telefono,puesto, especialidad);
+            return new Tecnico(dni, nombrecompleto,nomina, telefono,puesto, especialidad);
 
         default:
             throw new IllegalArgumentException("Tipo de persona no reconocido: " + tipo);
