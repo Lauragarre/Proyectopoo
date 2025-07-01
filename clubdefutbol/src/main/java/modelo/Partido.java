@@ -4,64 +4,47 @@
  */
 package modelo;
 
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.ArrayList;
+
 /**
  *
  * @author PCLino
  */
 public class Partido {
-   private int codigo;
-   private static int ultimoCodigo=0;
+   
    private String nombrerival;
-   private int telefono;
-   //private date fechapartido;
+   private LocalDateTime fechapartido;
    private int golesvisitante;
    private int goleslocal;
-   private Jugador jugadores;
+   private ArrayList<Jugador> jugadores;
    
-    public Partido(int codigo, String nombrerival, int telefono, int golesvisitante, int goleslocal, Jugador jugadores) {
-        this.codigo = codigo;
+    public Partido(String nombrerival, LocalDateTime  fechapartido, int golesvisitante, int goleslocal, ArrayList<Jugador> jugadores) {
         this.nombrerival = nombrerival;
-        this.telefono = telefono;
+        this.fechapartido = fechapartido;
         this.golesvisitante = golesvisitante;
         this.goleslocal = goleslocal;
         this.jugadores = jugadores;
     }
-     public int getCodigo() {
-        return codigo;
-    }
 
-    public void setCodigo(int codigo) {
-        this.codigo = codigo;
+    public LocalDateTime getFechapartido() {
+        return fechapartido;
     }
-
-    public static int getUltimoCodigo() {
-        return ultimoCodigo;
-    }
-
-    public static void setUltimoCodigo(int ultimoCodigo) {
-        Partido.ultimoCodigo = ultimoCodigo;
+    public void setFechapartido(LocalDateTime fechapartido) {
+        this.fechapartido = fechapartido;
     }
 
     public String getNombrerival() {
         return nombrerival;
     }
-
     public void setNombrerival(String nombrerival) {
         this.nombrerival = nombrerival;
-    }
-
-    public int getTelefono() {
-        return telefono;
-    }
-
-    public void setTelefono(int telefono) {
-        this.telefono = telefono;
     }
 
     public int getGolesvisitante() {
         return golesvisitante;
     }
-
     public void setGolesvisitante(int golesvisitante) {
         this.golesvisitante = golesvisitante;
     }
@@ -69,16 +52,14 @@ public class Partido {
     public int getGoleslocal() {
         return goleslocal;
     }
-
     public void setGoleslocal(int goleslocal) {
         this.goleslocal = goleslocal;
     }
 
-    public Jugador getJugadores() {
+    public List<Jugador> getJugadores() {
         return jugadores;
     }
-
-    public void setJugadores(Jugador jugadores) {
+    public void setJugadores(ArrayList<Jugador> jugadores) {
         this.jugadores = jugadores;
     }
 }
